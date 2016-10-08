@@ -1,0 +1,65 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.qlda.LoginEmailActivity"
+    android:id="@+id/ttt">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email Login "
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="#ff1d24ff"
+        android:id="@+id/edtEmailTitlt" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TableRow>
+            <TextView
+                android:textSize="20sp"
+                android:text="Username: "
+               />
+            <EditText
+                android:id="@+id/edtUsername"
+                android:ems="13"
+                android:textSize="15sp"
+                android:layout_width="match_parent" />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:textSize="20sp"
+                android:text="Password: "/>
+            <EditText
+                android:id="@+id/edtPass"
+                android:textSize="15dp"
+                android:inputType="textPassword" />
+
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:id="@+id/lbn"
+        android:layout_marginTop="15dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/btnCancel"
+            android:layout_marginLeft="80dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:id="@+id/btnOK"
+            android:layout_marginLeft="30dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.administrator.qlda" >
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+    <!-- To access Google+ APIs: -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--
+ To retrieve OAuth 2.0 tokens or invalidate tokens to disconnect a user. This disconnect
+     option is required to comply with the Google+ Sign-In developer policies
+    -->
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" /> <!-- To retrieve the account name (email) as part of sign-in: -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" /> <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ChoiceItemActivity"
+            android:label="@string/title_activity_choice_item"
+            android:parentActivityName=".MainActivity"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".AddMessageActivity"
+            android:label="@string/title_activity_add_message"
+            android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity
+            android:name=".AddEmailActivity"
+            android:label="@string/title_activity_add_email"
+            android:parentActivityName=".MainActivity" >
+        </activity>
+
+        <receiver android:name=".receive.service.AlarmReceiver" />
+
+        <service android:name=".receive.service.SendMessageService" />
+
+        <activity
+            android:name=".DetailMessageActivity"
+            android:label="@string/title_activity_detail_message"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.administrator.qlda.MainActivity" />
+        </activity>
+        <activity
+            android:name=".DetailEmailActivity"
+            android:label="@string/title_activity_detail_email"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.administrator.qlda.MainActivity" />
+        </activity>
+        <activity
+            android:name=".LoginEmailActivity"
+            android:label="@string/title_activity_login_email"
+            android:theme="@android:style/Theme.Holo.Dialog.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".EditMessageActivity"
+            android:parentActivityName=".DetailMessageActivity" />
+        <activity
+            android:name=".EditEmailActivity"
+            android:label="@string/title_activity_edit_email" >
+        </activity>
+    </application>
+
+</manifest>

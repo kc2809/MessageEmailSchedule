@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:background="@drawable/shape"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/contacticon"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="abcdg"
+            android:textSize="20dp"
+            android:id="@+id/tvContact1"
+            android:gravity="left|center"
+            android:textColor="#b739ffff" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="abcdg"
+            android:textSize="20dp"
+            android:id="@+id/tvContact2"
+            android:gravity="left"
+            android:textColor="#b7000000" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,266 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.administrator.qlda.AddEmailActivity">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView3" >
+
+        <LinearLayout  android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/rl">
+
+            <RelativeLayout
+                android:id="@+id/layoutTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:background="#009F9F">
+
+                <ImageButton
+                    android:id="@+id/btnOK"
+                    android:layout_width="80dp"
+                    android:layout_height="45dp"
+                    android:src="@drawable/doneic"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:id="@+id/btnUndo"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/undo"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="Click here to choose account"
+                    android:layout_marginLeft="15dp" />
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:text="add"
+                    android:src="@drawable/change"
+                    android:scaleType="fitXY"
+                    android:background="@null"
+                    android:id="@+id/btnAddEmail"
+                    android:layout_marginLeft="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_height="wrap_content"
+                android:id="@+id/ln">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="From: "
+                    android:gravity="center"
+                    android:layout_margin="15dp"
+                    android:id="@+id/tv1"
+                    android:paddingLeft="5dp"
+                    android:textSize="20dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="4"
+                    android:minHeight="30dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvFrom"
+                    android:textSize="15dp"
+                    android:text="zhuukhanhz@gmail.com"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="12dp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+               >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="To:      "
+                    android:gravity="center"
+                    android:layout_margin="15dp"
+                    android:paddingLeft="5dp"
+                    android:textSize="20dp"
+                   />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:background="@drawable/shape"
+                    android:layout_weight="4"
+                    android:minHeight="30dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtToObj"
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginLeft="10dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Subject:  "
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:textSize="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginRight="5dp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:background="@drawable/shape"
+
+                    android:minHeight="30dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/edtSubject"
+                    android:textSize="15dp"
+                    android:text="Object"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginRight="20dp" />
+            </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message"
+            android:textSize="20dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            android:textColor="#ff8f8f8f" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtMessage"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="5dp"
+            android:paddingRight="5dp"
+            android:minHeight="50dp"
+            android:background="@drawable/shape"
+            android:gravity="top|left"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:textColor="#ff8f8f8f"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0.44"
+            android:weightSum="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:weightSum="1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:text="Date :"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:id="@+id/textView12"
+                    android:layout_alignTop="@+id/tvDate"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvDate"
+                    android:text="01/10/2016"
+                    android:background="@drawable/shape"
+                    android:gravity="center"
+                    android:textSize="35dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/textView12"
+                    android:layout_toEndOf="@+id/textView12"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="0.23" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:weightSum="1">
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:text="Time :"
+                    android:gravity="center"
+                    android:textSize="20dp"
+                    android:id="@+id/textView"
+                    android:layout_alignTop="@+id/tvTime"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvTime"
+                    android:text="01:02 pm"
+                    android:gravity="center"
+                    android:background="@drawable/shape"
+                    android:textSize="35dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="25dp"
+                    android:layout_weight="0.42" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

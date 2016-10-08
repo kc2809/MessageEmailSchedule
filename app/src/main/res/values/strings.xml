@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">QLDA</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="pes1String">Fragment 1</string>
+    <string name="pes2String">Fragment 2</string>
+    <string name="pes3String">Fragment 3</string>
+    <string name="title_activity_choice_item">ChoiceItemActivity</string>
+    <string name="title_activity_add_message">AddMessageActivity</string>
+    <string name="title_activity_add_email">AddEmailActivity</string>
+    <string name="title_activity_detail_message">DetailMessageActivity</string>
+    <string name="title_activity_detail_email">DetailEmailActivity</string>
+    <string name="title_activity_login_email">LoginEmailActivity</string>
+    <string name="title_activity_edit_email">EditEmailActivity</string>
+</resources>

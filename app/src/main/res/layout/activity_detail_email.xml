@@ -1,0 +1,179 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.example.administrator.qlda.DetailMessageActivity"
+    android:background="#ffffffff">
+
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="vertical"
+            android:background="#ffffffff">
+
+            <RelativeLayout
+                android:id="@+id/layoutTitle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="1"
+                android:background="#009F9F">
+
+                <ImageButton
+                    android:id="@+id/btnEdit"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/edticon"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/btnDelete"
+                    android:layout_toStartOf="@+id/btnDelete"
+                    android:layout_margin="5dp" />
+                <ImageButton
+                    android:id="@+id/btnDelete"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/traskicon"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/btnSend"
+                    android:layout_toStartOf="@+id/btnSend"
+                    android:layout_margin="5dp" />
+                <ImageButton
+                    android:id="@+id/btnSend"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/sendicon"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_margin="5dp" />
+                <ImageButton
+                    android:id="@+id/btnUndo"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/undo"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="5dp" />
+            </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="FROM"
+                android:layout_margin="10dp"
+                android:textSize="20dp"
+                android:textColor="#b7ffaa24"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvFromObj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:text="adfasdfsadfsdaf"
+                android:paddingLeft="20dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SUBJECT"
+                android:layout_margin="10dp"
+                android:textSize="20dp"
+                android:textColor="#b7ffaa24"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvSubject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:text="adfasdfsadfsdaf"
+                android:paddingLeft="20dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="MESSAGE"
+                android:layout_margin="10dp"
+                android:textSize="20dp"
+                android:textColor="#b7ffaa24"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:text="adfasdfsadfsdaf"
+                android:paddingLeft="20dp"
+                android:textSize="15dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RECIPENTS"
+                android:layout_margin="10dp"
+                android:textSize="20dp"
+                android:textColor="#b7ffaa24"
+                android:textStyle="bold" />
+            <ListView
+                android:id="@+id/lvRecipent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="10dp">
+
+            </ListView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SCHEDULED TIME"
+                android:layout_margin="10dp"
+                android:textSize="20dp"
+                android:textColor="#b7ffaa24"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvScheduleTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:text="adfasdfsadfsdaf"
+                android:paddingLeft="20dp"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="STATUS"
+                android:layout_margin="10dp"
+                android:textSize="20dp"
+                android:textColor="#b7ffaa24"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:text="Discarded"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_marginLeft="30dp"
+                android:background="#6c3b2831"
+                android:id="@+id/tvStatus"
+                android:textColor="#ffffffff"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
