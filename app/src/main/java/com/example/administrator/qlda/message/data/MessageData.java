@@ -8,6 +8,15 @@ public class MessageData implements Serializable {
     String subject= null;
     String message= null;
 
+    String displayName =null;
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
     public String getTo() {
         return to;
@@ -38,6 +47,13 @@ public class MessageData implements Serializable {
         this.to = to;
         this.subject = subject;
         this.message = message;
+    }
+
+    public MessageData(String to, String subject, String message, String displayName) {
+        this.to = to;
+        this.subject = subject;
+        this.message = message;
+        this.displayName = displayName;
     }
 
     public MessageData() {

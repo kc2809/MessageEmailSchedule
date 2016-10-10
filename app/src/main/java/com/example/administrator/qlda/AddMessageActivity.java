@@ -6,6 +6,9 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,29 +19,64 @@ import android.widget.Toast;
 import com.example.administrator.qlda.message.data.Data;
 import com.example.administrator.qlda.message.data.MessageData;
 import com.example.administrator.qlda.message.data.MyTime;
+import com.example.administrator.qlda.message.data.PhoneContact;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 
 public class AddMessageActivity extends Activity implements Constant {
-    EditText edtTo,edtMessage;
+    AutoCompleteTextView edtTo;
+       EditText     edtMessage;
     TextView tvDate,tvTime;
 
     ImageButton imgBtnAdd,imgBtnUndo;
     Calendar cal;
+
+    ArrayList<PhoneContact> myArr;
+    ArrayAdapter<PhoneContact> adapter;
+
+    PhoneContact contactSelected=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        overridePendingTransition(R.transition.slide_in_right,R.transition.slide_out_right);
+        overridePendingTransition(R.transition.slide_in_right, R.transition.slide_out_right);
 
         setContentView(R.layout.activity_add_message);
 
         addControls();
+
+        setDataForAutoCompleteText();
         addListener();
         getDefaultInfo();
+    }
+
+    private void setDataForAutoCompleteText() {
+        myArr = Transfer.getInstance().getAllPhoneContact(this);
+        adapter = new ArrayAdapter<PhoneContact>(this,android.R.layout.simple_list_item_1,myArr);
+
+        edtTo.setAdapter(adapter);
+        edtTo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                contactSelected = (PhoneContact) adapterView.getAdapter().getItem(i);
+                edtTo.setText(contactSelected.getDisplayName());
+            }
+        });
+    }
+
+    private boolean checkIsValidNumber(){
+        String s = edtTo.getText().toString();
+        for(int i =0; i< myArr.size();++i){
+            if(myArr.get(i).getDisplayName().equals(s)) return true;
+        }
+
+
+        return false;
     }
 
     private void addListener() {
@@ -74,7 +112,7 @@ public class AddMessageActivity extends Activity implements Constant {
     }
 
     private void addControls() {
-        edtTo = (EditText)findViewById(R.id.edtTo);
+        edtTo = (AutoCompleteTextView)findViewById(R.id.edtTo);
         edtMessage = (EditText)findViewById(R.id.eddtMessage);
         tvDate = (TextView)findViewById(R.id.tvDate);
         tvTime= (TextView)findViewById(R.id.tvTime);
@@ -153,12 +191,22 @@ public class AddMessageActivity extends Activity implements Constant {
     private void addData(){
         String mess="";
         int check = isValidData();
+        String to=null;
 
         // if data is valid
         if( check == 0){
             Intent intent = getIntent();
+
+            //
+            if(checkIsValidNumber()==true){
+                to = contactSelected.getPhoneNumber().toString();
+            }
+            else{
+                to = edtTo.getText().toString();
+            }
+
             //return data message
-            MessageData messageData = new MessageData(edtTo.getText()+"",null,edtMessage.getText().toString());
+            MessageData messageData = new MessageData(to,null,edtMessage.getText().toString());
             MyTime myTime = new MyTime(tvDate.getText()+"",tvTime.getTag()+"",0,0);
             Data myData = new Data(messageData,myTime);
 

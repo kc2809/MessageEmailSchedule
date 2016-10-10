@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.qlda.Constant;
 import com.example.administrator.qlda.EditEmailActivity;
@@ -31,13 +32,11 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 9/26/2016.
  */
-public class MyAdapter extends ArrayAdapter<Data> implements View.OnClickListener ,Constant{
+public class MyAdapter extends ArrayAdapter<Data> implements Constant{
     Activity context = null;
     ArrayList<Data> myArray = null;
     int layoutId;
 
-    Data data;
-    int position;
 
     public MyAdapter(Activity context, int resource, ArrayList<Data> arr) {
         super(context, resource, arr);
@@ -48,12 +47,11 @@ public class MyAdapter extends ArrayAdapter<Data> implements View.OnClickListene
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        this.position = position;
 
         LayoutInflater inflater = context.getLayoutInflater();
         convertView = inflater.inflate(layoutId,null);
         if(myArray.size()>0 && position>=0){
-             data = myArray.get(position);
+             final Data data = myArray.get(position);
 
 
             final ImageView imgIcon = (ImageView)convertView.findViewById(R.id.ivIcon);
@@ -63,7 +61,13 @@ public class MyAdapter extends ArrayAdapter<Data> implements View.OnClickListene
             final ImageButton btnDelete = (ImageButton)convertView.findViewById(R.id.imgBtnDelete);
 
 
-            btnDelete.setOnClickListener(this);
+            btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(context, "position: " + position, Toast.LENGTH_LONG).show();
+                    showPopup(view,position,data);
+                }
+            });
 
             if(data.getTime().getType() == 0){
                 imgIcon.setImageResource(R.drawable.smsic1);
@@ -81,11 +85,7 @@ public class MyAdapter extends ArrayAdapter<Data> implements View.OnClickListene
         return convertView;
     }
 
-    @Override
-    public void onClick(View view) {
-        showPopup(view);
-    }
-    public void showPopup(View v){
+    public void showPopup(View v,final int position,final Data data){
         PopupMenu popup = new PopupMenu(context, v);
         try {
             Class<?> classPopupMenu = Class.forName(popup
@@ -109,10 +109,10 @@ public class MyAdapter extends ArrayAdapter<Data> implements View.OnClickListene
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.menuEdit:
-                        actionEdit();
+                        actionEdit(data);
                         break;
                     case R.id.menuDelete:
-                        actionDelete();
+                        actionDelete(position,data);
                         break;
                 }
                 return false;
@@ -122,7 +122,7 @@ public class MyAdapter extends ArrayAdapter<Data> implements View.OnClickListene
         popup.show();
     }
 
-    private void actionEdit(){
+    private void actionEdit(Data data){
         Intent in ;
 
         int requestCode;
@@ -141,7 +141,7 @@ public class MyAdapter extends ArrayAdapter<Data> implements View.OnClickListene
         context.startActivityForResult(in,requestCode);
     }
 
-    private void actionDelete(){
+    private void actionDelete(final int position,final Data data){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setMessage("Are you sure to delete this message... ? ")
                             .setPositiveButton("YES", new DialogInterface.OnClickListener() {

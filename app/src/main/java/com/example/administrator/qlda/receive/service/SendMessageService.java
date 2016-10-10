@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.widget.Toast;
 
-import com.example.administrator.qlda.MainActivity;
 import com.example.administrator.qlda.Transfer;
 import com.example.administrator.qlda.database.MyDatabase;
 import com.example.administrator.qlda.message.data.Data;
@@ -17,6 +16,8 @@ import com.example.administrator.qlda.send.email.GMailSender;
 public class SendMessageService extends Service {
     MyDatabase myDatabase;
     Data data;
+
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -57,10 +58,15 @@ public class SendMessageService extends Service {
     @Override
     public void onDestroy() {
         Transfer.getInstance().sequenceAlarm(getApplicationContext());
-        MainActivity.isChanged = true;
+        updateUI();
         super.onDestroy();
     }
 
+    public void  updateUI(){
+        Intent local =new Intent();
+        local.setAction("update.ui");
+        this.sendBroadcast(local);
+    }
 
 
     private void sendEmail(){

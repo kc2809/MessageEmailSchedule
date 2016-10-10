@@ -7,12 +7,16 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.telephony.SmsManager;
 import android.widget.Toast;
 
 import com.example.administrator.qlda.database.MyDatabase;
 import com.example.administrator.qlda.message.data.Data;
+import com.example.administrator.qlda.message.data.PhoneContact;
 import com.example.administrator.qlda.receive.service.AlarmReceiver;
 
 import java.util.ArrayList;
@@ -25,6 +29,8 @@ public class Transfer {
     private static Transfer instance = null;
     MyDatabase myDatabase;
     Context context=null;
+
+    ArrayList<PhoneContact> arr=null;
 
     private Transfer(){
     }
@@ -116,4 +122,34 @@ public class Transfer {
 
         }
     }
+
+    public  ArrayList<PhoneContact> getAllPhoneContact(Context context){
+
+        if(arr ==null){
+            arr = new ArrayList<>();
+            PhoneContact d = null;
+            Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+            Cursor cursor = context.getContentResolver().query(
+                    uri,new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER,
+                            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                            ContactsContract.CommonDataKinds.Phone._ID},null,null,ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+ " ASC");
+            cursor.moveToFirst();
+            while(cursor.isAfterLast() == false){
+
+                String contactNumber = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+                String  contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+                int phoneContactId = cursor.getInt(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone._ID));
+
+                d = new PhoneContact(contactName,contactNumber,phoneContactId);
+                arr.add(d);
+
+                d= null;
+                cursor.moveToNext();
+            }
+            cursor.close();
+            cursor = null;
+        }
+        return arr;
+    }
+
 }

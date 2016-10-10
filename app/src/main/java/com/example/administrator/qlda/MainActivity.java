@@ -2,8 +2,10 @@ package com.example.administrator.qlda;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -36,7 +38,8 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
     MyDatabase myDatabase;
 
-    public static boolean isChanged = false;
+    BroadcastReceiver receiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +49,26 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
         getDatabase();
 
+        receiverFromService();
 
         initViewPage();
         initializeTabs();
 
         addListener();
+    }
+
+
+    private void receiverFromService() {
+        IntentFilter intentFilter  = new IntentFilter();
+        intentFilter.addAction("update.ui");
+        receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                refresh();
+            }
+        };
+        registerReceiver(receiver,intentFilter);
+
     }
 
     @Override
@@ -171,10 +189,10 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     @Override
     public void onPageSelected(int selectedItem) {
         tabHost.setCurrentTab(selectedItem);
-        if(isChanged == true){
-            refresh();
-            isChanged = false;
-        }
+//        if(isChanged == true){
+//            refresh();
+//            isChanged = false;
+//        }
 
     }
     //ViewPager listern
@@ -236,6 +254,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         }
     }
 
+
     public void refresh(){
 
         PendingFragment newPending = new PendingFragment();
@@ -248,9 +267,11 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
         myFragmentPageAdapter.notifyDataSetChanged();
 
-        isChanged =false;
     }
 
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(receiver);
+    }
 }
