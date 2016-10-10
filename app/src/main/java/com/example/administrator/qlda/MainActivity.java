@@ -267,6 +267,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
 
         myFragmentPageAdapter.notifyDataSetChanged();
 
+        //xin chao
     }
 
     @Override
