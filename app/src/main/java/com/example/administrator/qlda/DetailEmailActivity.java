@@ -16,6 +16,7 @@ import com.example.administrator.qlda.adapter.RecipentAdapter;
 import com.example.administrator.qlda.database.MyDatabase;
 import com.example.administrator.qlda.message.data.Data;
 import com.example.administrator.qlda.message.data.EmailAccount;
+import com.example.administrator.qlda.message.data.PhoneContact;
 import com.example.administrator.qlda.send.email.GMailSender;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class DetailEmailActivity extends Activity implements Constant {
     ListView lvRecipent;
     ImageButton btnUndo,btnEdit,btnDelete,btnSend;
 
-    ArrayList<String> myArr = new ArrayList<>();
+    ArrayList<PhoneContact> myArr = new ArrayList<>();
     RecipentAdapter adapter;
 
     Data data;
@@ -168,7 +169,7 @@ public class DetailEmailActivity extends Activity implements Constant {
         tvStatus.setText(status);
 
 
-        myArr.add(data.getMessage().getTo());
+        myArr.add(new PhoneContact(data.getMessage().getDisplayName(),data.getMessage().getTo()));
         adapter = new RecipentAdapter(this,R.layout.recipent_item_layout,myArr);
         lvRecipent.setAdapter(adapter);
     }
@@ -185,7 +186,7 @@ public class DetailEmailActivity extends Activity implements Constant {
             tvStatus.setText("PENDING");
 
             System.out.println("----haha @@@"+ newData.getMessage().getTo());
-            myArr.add(newData.getMessage().getTo());
+            myArr.add(new PhoneContact(newData.getMessage().getDisplayName(),newData.getMessage().getTo()));
             adapter = new RecipentAdapter(this,R.layout.recipent_item_layout,myArr);
             lvRecipent.setAdapter(adapter);
             adapter.notifyDataSetChanged();

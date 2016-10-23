@@ -42,7 +42,7 @@ public class AddEmailActivity extends ActionBarActivity implements Constant{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.transition.fadein, R.transition.fadeout);
+ //       overridePendingTransition(R.transition.fadein, R.transition.fadeout);
 
         setContentView(R.layout.activity_add_email);
 
@@ -76,35 +76,68 @@ public class AddEmailActivity extends ActionBarActivity implements Constant{
         finish();
     }
 
+    public void add(){
+        Intent intent = getIntent();
+        //return data message
+        MessageData messageData = new MessageData(edtToObj.getText()+"",edtSubject.getText()+"",edtMessage.getText().toString(),
+                edtToObj.getText()+"");
+        MyTime myTime = new MyTime(tvDate.getText()+"",tvTime.getTag()+"",1,0);
+        Data myData = new Data(messageData,myTime);
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("MessageContent", myData);
+        intent.putExtra("DATA", bundle);
+
+        setResult(ADD_EMAIL_SUCCEED,intent);
+        finish();
+    }
     private void returnData(){
         String mess="";
         int check = isValidData();
 
-        if(tvFrom.getText().toString().equals("")){
-            Toast.makeText(this,"Account is empty. \nClick Add to choose an account",Toast.LENGTH_LONG).show();
-            return;
-        }
 
         // if data is valid
         if( check == 0){
-            Intent intent = getIntent();
-            //return data message
-            MessageData messageData = new MessageData(edtToObj.getText()+"",edtSubject.getText()+"",edtMessage.getText().toString());
-            MyTime myTime = new MyTime(tvDate.getText()+"",tvTime.getTag()+"",1,0);
-            Data myData = new Data(messageData,myTime);
+            if(edtSubject.getText().toString().trim().length()==0){
+                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Are you sure to send this email without subject ? ")
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                add();
+                            }
+                        })
+                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
 
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("MessageContent",myData);
-            intent.putExtra("DATA",bundle);
+            }
+            else{
+                add();
+            }
 
-            setResult(ADD_EMAIL_SUCCEED,intent);
-            mess= "Add data successfully";
-            finish();
         }
-        else{
-            mess= "The schedule time is smaller than current time";
+        else if(check == 2){
+            mess = "Account is empty. \nChoose an account.";
         }
-        Toast.makeText(this, mess, Toast.LENGTH_LONG).show();
+        else if(check == 3){
+            mess = "Recipient is empty.";
+        }
+        else if (check == 4) {
+            mess = "Unrecognized recipient.";
+
+        } else {
+            mess = "The schedule time is smaller than current time";
+        }
+        if(check!=0){
+            Toast.makeText(this, mess, Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void doAddEmail() {
@@ -274,6 +307,17 @@ public class AddEmailActivity extends ActionBarActivity implements Constant{
 
     private int isValidData(){
 
+        if(tvFrom.getText().toString().trim().length() == 0){
+            return 2;
+        }
+        if(edtToObj.getText().toString().trim().length()==0){
+            return 3;
+        }
+        if(!edtToObj.getText().toString().contains("@")){
+            return 4;
+        }
+
+
         String tim = (String) tvTime.getTag();
         System.out.println("@@@@ --- "+tim);
         MyTime myTime = new MyTime(tvDate.getText()+"",tim,0,0);
@@ -285,7 +329,6 @@ public class AddEmailActivity extends ActionBarActivity implements Constant{
         if(currentDate.getTimeInMillis()+ 10000 > calendar.getTimeInMillis()){
             return 1;
         }
-
         return 0;
     }
 }

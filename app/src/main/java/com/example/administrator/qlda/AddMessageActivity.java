@@ -29,7 +29,7 @@ import java.util.Locale;
 
 public class AddMessageActivity extends Activity implements Constant {
     AutoCompleteTextView edtTo;
-       EditText     edtMessage;
+    EditText     edtMessage;
     TextView tvDate,tvTime;
 
     ImageButton imgBtnAdd,imgBtnUndo;
@@ -44,7 +44,7 @@ public class AddMessageActivity extends Activity implements Constant {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        overridePendingTransition(R.transition.slide_in_right, R.transition.slide_out_right);
+   //     overridePendingTransition(R.transition.slide_in_right, R.transition.slide_out_right);
 
         setContentView(R.layout.activity_add_message);
 
@@ -192,21 +192,23 @@ public class AddMessageActivity extends Activity implements Constant {
         String mess="";
         int check = isValidData();
         String to=null;
+        String displayName;
 
         // if data is valid
         if( check == 0){
             Intent intent = getIntent();
-
             //
             if(checkIsValidNumber()==true){
                 to = contactSelected.getPhoneNumber().toString();
+                displayName = contactSelected.getDisplayName();
             }
             else{
                 to = edtTo.getText().toString();
+                displayName = edtTo.getText().toString();
             }
 
             //return data message
-            MessageData messageData = new MessageData(to,null,edtMessage.getText().toString());
+            MessageData messageData = new MessageData(to,null,edtMessage.getText().toString(),displayName);
             MyTime myTime = new MyTime(tvDate.getText()+"",tvTime.getTag()+"",0,0);
             Data myData = new Data(messageData,myTime);
 
@@ -218,6 +220,12 @@ public class AddMessageActivity extends Activity implements Constant {
             mess= "Add data successfully";
             finish();
         }
+        else if(check == 2){
+            mess= "Recipent is empty.";
+        }
+        else if(check == 3){
+            mess = "Message is empty.";
+        }
         else{
             mess= "The schedule time is smaller than current time";
         }
@@ -225,7 +233,11 @@ public class AddMessageActivity extends Activity implements Constant {
     }
 
     private int isValidData(){
-        int check=0;
+
+        if(edtTo.getText().toString().trim().length() == 0 ) return 2;
+        if(edtMessage.getText().toString().trim().length() == 0 ) return 3;
+
+
         String tim = (String) tvTime.getTag();
         System.out.println("@@@@ --- "+tim);
         MyTime myTime = new MyTime(tvDate.getText()+"",tim,0,0);
@@ -244,6 +256,6 @@ public class AddMessageActivity extends Activity implements Constant {
             return 1;
         }
 
-        return check;
+        return 0;
     }
 }

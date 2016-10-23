@@ -46,7 +46,6 @@ public class MyFragmentPageAdapter extends FragmentStatePagerAdapter{
         } else {
             return POSITION_NONE;
         }
-
     }
 
     public void replace(Fragment f,int position){

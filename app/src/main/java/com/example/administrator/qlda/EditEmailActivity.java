@@ -165,16 +165,36 @@ public class EditEmailActivity extends ActionBarActivity implements Constant{
 
             mess = "Succeed";
         }
-        else{
-            mess= "The schedule time is smaller than current time";
+        else if(check == 2){
+            mess = "Account is empty. \nChoose an account.";
         }
-        Toast.makeText(this, mess, Toast.LENGTH_LONG).show();
+        else if(check == 3){
+            mess = "Recipient is empty.";
+        }
+        else if (check == 4) {
+            mess = "Unrecognized recipient.";
 
-
+        } else {
+            mess = "The schedule time is smaller than current time";
+        }
+        if(check!=0){
+            Toast.makeText(this, mess, Toast.LENGTH_LONG).show();
+        }
     }
 
     private int isValidData(){
         int check=0;
+        if(tvFrom.getText().toString().trim().length() == 0){
+            return 2;
+        }
+        if(edtTo.getText().toString().trim().length()==0){
+            return 3;
+        }
+        if(!edtTo.getText().toString().contains("@")){
+            return 4;
+        }
+
+
         String tim = (String) tvTime.getTag();
         System.out.println("@@@@ --- "+tim);
         MyTime myTime = new MyTime(tvDate.getText()+"",tim,0,0);

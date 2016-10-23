@@ -121,6 +121,12 @@ public class Transfer {
                     PendingIntent.getBroadcast(context, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 
         }
+        else{
+            Intent alertIntent = new Intent(context,AlarmReceiver.class);
+            AlarmManager alarmManager = (AlarmManager)context.getSystemService(context.ALARM_SERVICE);
+            PendingIntent pendingIntent =  PendingIntent.getBroadcast(context, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager.cancel(pendingIntent);
+        }
     }
 
     public  ArrayList<PhoneContact> getAllPhoneContact(Context context){

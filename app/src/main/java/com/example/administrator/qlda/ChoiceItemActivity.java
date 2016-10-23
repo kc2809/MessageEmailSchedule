@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 
 public class ChoiceItemActivity extends Activity implements Constant{
@@ -45,7 +44,6 @@ public class ChoiceItemActivity extends Activity implements Constant{
     }
 
     private void doSmsIntent() {
-        Toast.makeText(this, "SMS INTENT", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this,AddMessageActivity.class);
         startActivityForResult(intent, OPEN_ADD_ACTIVITY);
     }

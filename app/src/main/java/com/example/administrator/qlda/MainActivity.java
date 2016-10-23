@@ -171,7 +171,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
     }
     public void setTabColor(TabHost tabHost){
         for(int i=0;i<tabHost.getTabWidget().getChildCount();++i){
-           tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#FFFFFF"));
+            tabHost.getTabWidget().getChildAt(i).setBackgroundColor(Color.parseColor("#FFFFFF"));
             TextView t = (TextView) tabHost.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
             t.setTextColor(Color.parseColor("#45000000"));
         }
@@ -219,6 +219,7 @@ public class MainActivity extends FragmentActivity implements ViewPager.OnPageCh
         }
         if(resultCode == EDIT_MESSAGE_RESPONSE ||resultCode== EDIT_EMAIL_RESPONSE){
             refresh();
+            Transfer.getInstance().sequenceAlarm(this);
         }
 
     }

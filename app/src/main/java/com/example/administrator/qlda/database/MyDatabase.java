@@ -54,6 +54,7 @@ public class MyDatabase {
     public void createMessageTable(){
         String sql = "CREATE TABLE [tbl_message_data] (\n" +
                 "[id] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,\n" +
+                "[name] TEXT  NULL,\n" +
                 "[toobj] TEXT  NULL,\n" +
                 "[subject] TEXT  NULL,\n" +
                 "[message] TEXT  NULL,\n" +
@@ -86,6 +87,7 @@ public class MyDatabase {
         //add to content
         content.put("toobj",messContent.getTo());
         content.put("message",messContent.getMessage());
+        content.put("name",messContent.getDisplayName());
         if(messContent.getSubject() !=null){
             content.put("subject",messContent.getSubject());
         }
@@ -144,10 +146,11 @@ public class MyDatabase {
             arr = new ArrayList();
             cursor.moveToFirst();
             while(cursor.isAfterLast() == false){
-                MessageData messageData = new MessageData(cursor.getString(1), cursor.getString(2),cursor.getString(3));
+            //    MessageData messageData = new MessageData(cursor.getString(1), cursor.getString(2),cursor.getString(3));
+                MessageData messageData = new MessageData(cursor.getString(2), cursor.getString(3),cursor.getString(4),
+                        cursor.getString(1));
 
-
-                MyTime tempTime = new MyTime(cursor.getString(4),cursor.getString(5), cursor.getInt(6), cursor.getInt(7));
+                MyTime tempTime = new MyTime(cursor.getString(5),cursor.getString(6), cursor.getInt(7), cursor.getInt(8));
                 Data tempData = new Data(messageData,tempTime, Integer.parseInt(cursor.getString(0)));
                 arr.add(tempData);
                 cursor.moveToNext();
@@ -203,6 +206,7 @@ public class MyDatabase {
 
     public boolean updateMessageByItem(Data data){
         ContentValues values = new ContentValues();
+        values.put("name",data.getMessage().getDisplayName());
         values.put("toobj",data.getMessage().getTo());
         values.put("message",data.getMessage().getMessage());
         if(data.getMessage().getSubject() !=null){

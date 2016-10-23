@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.administrator.qlda.adapter.RecipentAdapter;
 import com.example.administrator.qlda.database.MyDatabase;
 import com.example.administrator.qlda.message.data.Data;
+import com.example.administrator.qlda.message.data.PhoneContact;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,7 @@ public class DetailMessageActivity extends ActionBarActivity implements Constant
     ListView lvRecipent;
     ImageButton btnUndo,btnEdit,btnDelete,btnSend;
 
-    ArrayList<String> myArr = new ArrayList<>();
+    ArrayList<PhoneContact> myArr = new ArrayList<>();
     RecipentAdapter adapter;
 
     Data data;
@@ -161,7 +162,7 @@ public class DetailMessageActivity extends ActionBarActivity implements Constant
         tvStatus.setText(status);
 
 
-        myArr.add(data.getMessage().getTo());
+        myArr.add(new PhoneContact(data.getMessage().getDisplayName(),data.getMessage().getTo()));
         adapter = new RecipentAdapter(this,R.layout.recipent_item_layout,myArr);
         lvRecipent.setAdapter(adapter);
     }
@@ -176,7 +177,8 @@ public class DetailMessageActivity extends ActionBarActivity implements Constant
             tvScheduleTime.setText(newData.getTime().toString());
             tvStatus.setText("PENDING");
 
-            myArr.add(newData.getMessage().getTo());
+            myArr.clear();
+            myArr.add(new PhoneContact(newData.getMessage().getDisplayName(),newData.getMessage().getTo()));
             adapter = new RecipentAdapter(this,R.layout.recipent_item_layout,myArr);
             lvRecipent.setAdapter(adapter);
 

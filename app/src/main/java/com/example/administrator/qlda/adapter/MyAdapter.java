@@ -15,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.qlda.Constant;
 import com.example.administrator.qlda.EditEmailActivity;
@@ -64,7 +63,6 @@ public class MyAdapter extends ArrayAdapter<Data> implements Constant{
             btnDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(context, "position: " + position, Toast.LENGTH_LONG).show();
                     showPopup(view,position,data);
                 }
             });
@@ -77,7 +75,7 @@ public class MyAdapter extends ArrayAdapter<Data> implements Constant{
             }
 
 
-            tvToObj.setText(data.getMessage().getTo());
+            tvToObj.setText(data.getMessage().getDisplayName());
             contentObj.setText(data.getMessage().getMessage());
             timeObj.setText(data.getTime().toString());
         }

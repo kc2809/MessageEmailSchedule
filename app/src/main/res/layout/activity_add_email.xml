@@ -151,7 +151,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/edtSubject"
                     android:textSize="15dp"
-                    android:text="Object"
                     android:gravity="center"
                     android:paddingLeft="5dp"
                     android:layout_marginTop="12dp"

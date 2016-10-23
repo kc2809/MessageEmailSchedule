@@ -88,11 +88,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RECIPENTS"
+            android:text="RECIPIENTS"
             android:layout_margin="10dp"
             android:textSize="20dp"
             android:textColor="#b7ffaa24"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+          />
 
         <ListView
             android:id="@+id/lvRecipent"
