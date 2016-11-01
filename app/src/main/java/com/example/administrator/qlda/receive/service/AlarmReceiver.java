@@ -44,7 +44,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentTitle(message )
                 .setContentText(msgText)
                 .setTicker(alert)
-                .setSmallIcon(R.drawable.ic_launcher);
+                .setSmallIcon(R.drawable.bell);
 
         noti.setContentIntent(notificIntent);
         noti.setDefaults(Notification.DEFAULT_SOUND);
