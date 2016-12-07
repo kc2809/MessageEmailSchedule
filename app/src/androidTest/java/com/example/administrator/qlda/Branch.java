@@ -7,6 +7,6 @@ import android.util.Log;
  */
 public class Branch {
     public void xinchao(){
-        System.out.println("xin chao viet nam");
+        System.out.println("xin chao viet nam in master branch");
     }
 }
